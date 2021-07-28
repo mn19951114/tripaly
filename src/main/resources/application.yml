@@ -5,7 +5,7 @@ spring:
   datasource:
     username: root
     password: 123456
-    url: jdbc:mysql://127.0.0.1:3306/demodb
+    url: jdbc:mysql://127.0.0.1:3306/triplay
     driver-class-name: com.mysql.cj.jdbc.Driver
   application:
     name: triplay
@@ -15,6 +15,19 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    virtual-host: /
+    username: guest
+    password: guest
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    template:
+      mandatory: true
+    listener:
+      simple:
+        acknowledge-mode: manual
   session:
     store-type: redis
 

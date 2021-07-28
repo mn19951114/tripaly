@@ -1,5 +1,6 @@
 package com.ctrip.triplay.config;
 
+import com.ctrip.triplay.config.properties.ThreadPoolConfigProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

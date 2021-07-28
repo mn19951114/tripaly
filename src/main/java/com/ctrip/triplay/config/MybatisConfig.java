@@ -19,9 +19,10 @@ public class MybatisConfig {
         paginationInterceptor.setLimit(500);
         return paginationInterceptor;
     }
+
     //注册乐观锁插件
     @Bean
-    public OptimisticLockerInterceptor optimisticLockerInterceptor(){
+    public OptimisticLockerInterceptor optimisticLockerInterceptor() {
         return new OptimisticLockerInterceptor();
     }
 }
