@@ -13,6 +13,7 @@ import com.ctrip.triplay.entity.po.UserEntity;
 import com.ctrip.triplay.service.UserService;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 
@@ -32,10 +33,11 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
     /**
      * 用户登录
      * @param userEntity
+     * @param session
      * @return
      */
     @Override
-    public UserEntity login(UserEntity userEntity) {
+    public UserEntity login(UserEntity userEntity, HttpSession session) {
         QueryWrapper<UserEntity> wrapper = new QueryWrapper<>();
         wrapper.select("user_id","work_no","name","email")
                 .eq("email",userEntity.getEmail())
@@ -44,6 +46,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
         if(userInDB == null){
             throw new LogicException(BizCodeEnum.EMAIL_PWD_ERROR.getCode(),BizCodeEnum.EMAIL_PWD_ERROR.getMsg());
         }
+        session.setAttribute("loginStudent",userInDB);
         return userInDB;
     }
 

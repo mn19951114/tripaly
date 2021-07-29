@@ -8,6 +8,7 @@ import com.ctrip.triplay.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -24,9 +25,9 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/login")
-    public R login(@RequestBody UserEntity userEntity){
+    public R login(@RequestBody UserEntity userEntity, HttpSession session){
         try{
-            UserEntity userInfo = userService.login(userEntity);
+            UserEntity userInfo = userService.login(userEntity,session);
             return R.ok().put("data",userInfo);
         }catch (LogicException exception){
             return R.error(exception.getCode(),exception.getMsg());

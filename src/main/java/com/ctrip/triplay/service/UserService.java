@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.ctrip.triplay.common.utils.PageUtils;
 import com.ctrip.triplay.entity.po.UserEntity;
 
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 /**
@@ -16,6 +17,6 @@ public interface UserService extends IService<UserEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
 
-    UserEntity login(UserEntity userEntity);
+    UserEntity login(UserEntity userEntity, HttpSession session);
 }
 
