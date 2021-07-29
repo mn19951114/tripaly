@@ -1,5 +1,6 @@
 package com.ctrip.triplay.controller;
 
+import com.ctrip.triplay.common.exception.LogicException;
 import com.ctrip.triplay.common.utils.PageUtils;
 import com.ctrip.triplay.common.utils.R;
 import com.ctrip.triplay.entity.po.UserEntity;
@@ -21,6 +22,18 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @PostMapping("/login")
+    public R login(@RequestBody UserEntity userEntity){
+        try{
+            UserEntity userInfo = userService.login(userEntity);
+            return R.ok().put("data",userInfo);
+        }catch (LogicException exception){
+            return R.error(exception.getCode(),exception.getMsg());
+        }catch (Exception e){
+            throw new RuntimeException();
+        }
+    }
 
     /**
      * 列表
